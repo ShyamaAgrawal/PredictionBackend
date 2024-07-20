@@ -1,5 +1,7 @@
 const User = require('../models/User.js');
 const Booking = require('../models/Booking.js');
+const MedicalReport = require('../models/medicalReport.js');
+
 
 
 exports.getUserDetails = async (req, res) => {
