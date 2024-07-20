@@ -1,11 +1,5 @@
 const mongoose=require('mongoose');
 const medicalReportSchema =new mongoose.Schema({
-    users:[
-        {
-            type:mongoose.Types.ObjectId,
-            ref:"User"
-        }
-    ],
     gender: {
         type: String,
         enum: ["male", "female"]
@@ -21,7 +15,7 @@ const medicalReportSchema =new mongoose.Schema({
     wheezing:{type:String , enum:["Yes","No"]},
     alcohol_consuming:{type:String , enum:["Yes","No"]},
     coughing:{type:String , enum:["Yes","No"]},
-    shorness_of_breath:{type:String , enum:["Yes","No"]},
+    shortness_of_breath:{type:String , enum:["Yes","No"]},
     swallowing_difficulty:{type:String , enum:["Yes","No"]},
     chest_pain:{type:String , enum:["Yes","No"]},
     lung_cancer:{type:String , enum:["Yes","No"]}
