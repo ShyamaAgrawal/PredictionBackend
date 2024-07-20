@@ -1,7 +1,27 @@
 const User = require('../models/User.js');
-const Booking = require('../models/Booking.js');
 const MedicalReport = require('../models/medicalReport.js');
 
+
+
+const { spawn } = require("child_process");
+const path = require("path");
+
+async function callMLModel(inputData) {
+  return new Promise((resolve, reject) => {
+    const pythonProcess = spawn("python", [
+      path.join(__dirname, "Lung_Cancer_Risks.py"),
+      ...inputData,
+    ]);
+
+    pythonProcess.stdout.on("data", (data) => {
+      resolve(data.toString());
+    });
+
+    pythonProcess.stderr.on("data", (data) => {
+      reject(data.toString());
+    });
+  });
+}
 
 
 exports.getUserDetails = async (req, res) => {
