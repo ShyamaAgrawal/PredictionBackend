@@ -11,6 +11,6 @@ router.delete('/users/:id', authenticate, userController.deleteUser);
 
 router.get('/users/profile/me', authenticate,  userController.getUserProfile);
 // router.get('/users/appointments/my-appointments', authenticate, userController.getMyAppointments);
-
+router.post('/analyze',authenticate,userController.saveData)
 
 module.exports = router;

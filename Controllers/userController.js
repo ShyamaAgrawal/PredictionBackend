@@ -71,7 +71,7 @@ exports.getUserProfile = async (req,res)=>{
     }
 }
 
-app.post('/analyze', async (req, res) => {
+exports.saveData = async (req, res) => {
     try {
         const reportData = new MedicalReport(req.body);
         await reportData.save();
@@ -100,4 +100,4 @@ app.post('/analyze', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-});
+};
