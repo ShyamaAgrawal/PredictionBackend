@@ -1,5 +1,6 @@
 const mongoose=require('mongoose');
-const medicalReportSchema =new mongoose.Schema({
+const medicalReportSchema = new mongoose.Schema({
+    name:{type:String},
     gender: {
         type: String,
         enum: ["male", "female"]
@@ -19,8 +20,6 @@ const medicalReportSchema =new mongoose.Schema({
     swallowing_difficulty:{type:String , enum:["Yes","No"]},
     chest_pain:{type:String , enum:["Yes","No"]},
     lung_cancer:{type:String , enum:["Yes","No"]}
-
-
 })
 
 const MedicalReport = mongoose.model("MedicalReport", medicalReportSchema);

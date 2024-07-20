@@ -69,21 +69,30 @@ exports.getUserProfile = async (req,res)=>{
     }
 }
 
-app.post('/api/submit', async (req, res) => {
+app.post('/analyze', async (req, res) => {
     try {
         const reportData = new MedicalReport(req.body);
         await reportData.save();
 
-        // Here we need to call the ML model and pass the required data.
-        // Convert the data from the database to the format required by the model.
         const inputData = [
-            req.body.gender === "male" ? 1 : 0,  // Example conversion
-            req.body.age,
-            req.body.smoking === "Yes" ? 1 : 0,
-            // ... convert the rest of the fields similarly
+          req.body.name,
+          req.body.gender === "female" ? 1 : 0,
+          req.body.age,
+          req.body.smoking === "Yes" ? 1 : 0,
+          req.body.yellow_fingers === "Yes" ? 1 : 0,
+          req.body.peer_pressure === "Yes" ? 1 : 0,
+          req.body.chronic_diseases === "Yes" ? 1 : 0,
+          req.body.fatigue === "Yes" ? 1 : 0,
+          req.body.allergy === "Yes" ? 1 : 0,
+          req.body.wheezing === "Yes" ? 1 : 0,
+          req.body.alcohol_consuming === "Yes" ? 1 : 0,
+          req.body.coughing === "Yes" ? 1 : 0,
+          req.body.shortness_of_breath === "Yes" ? 1 : 0,
+          req.body.swallowing_difficulty === "Yes" ? 1 : 0,
+          req.body.chest_pain === "Yes" ? 1 : 0,
         ];
 
-        const result = await callMLModel(inputData); // Function to call ML model
+        const result = await callMLModel(inputData); 
 
         res.status(200).json({ result });
     } catch (error) {
