@@ -69,6 +69,10 @@ exports.getUserProfile = async (req,res)=>{
     }
 }
 
+exports.medicalUpdate = async(req,res)=>{
+
+}
+
 // get my appointments
 
 // exports.getMyAppointments = async(req,res)=>{
