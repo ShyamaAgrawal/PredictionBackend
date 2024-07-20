@@ -1,11 +1,5 @@
 const mongoose=require('mongoose');
 const medicalReportSchema =new mongoose.Schema({
-    users:[
-        {
-            type:mongoose.Types.ObjectId,
-            ref:"User"
-        }
-    ],
     gender: {
         type: String,
         enum: ["male", "female"]
