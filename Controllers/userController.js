@@ -69,22 +69,24 @@ exports.getUserProfile = async (req,res)=>{
     }
 }
 
-exports.medicalUpdate = async(req,res)=>{
+app.post('/api/submit', async (req, res) => {
+    try {
+        const reportData = new MedicalReport(req.body);
+        await reportData.save();
 
-}
+        // Here we need to call the ML model and pass the required data.
+        // Convert the data from the database to the format required by the model.
+        const inputData = [
+            req.body.gender === "male" ? 1 : 0,  // Example conversion
+            req.body.age,
+            req.body.smoking === "Yes" ? 1 : 0,
+            // ... convert the rest of the fields similarly
+        ];
 
-// get my appointments
+        const result = await callMLModel(inputData); // Function to call ML model
 
-// exports.getMyAppointments = async(req,res)=>{
-//     try {
-//         //retrieve appointments from booking
-//         const bookings = await Booking.find({user:req.userId})
-//         //extract doctor ids from appointments
-//         const doctorIds = bookings.map(el=>el.doctor._id);
-//         //retrieve doctors using doctor ids
-//         const doctors = await Doctor.find({_id:{$in:doctorIds}}).select('-password');
-//         res.status(200).json({success:true,message:"Appointments are getting",data:doctors})
-//     } catch (error) {
-//         res.status(500).json({ success: false, message: "Failed to fetch appointments" })
-//     }
-// }
+        res.status(200).json({ result });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
